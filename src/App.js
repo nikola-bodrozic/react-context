@@ -1,22 +1,22 @@
-import React from 'react';
-import './App.css';
+import React from "react";
+import "./App.css";
 
-import Shop from './comp/shop';
-import Header from './comp/header';
-import Map from './comp/map';
+import AddUser from "./comp/AddUser";
+import Header from "./comp/Header";
+import Map from "./comp/Map";
 
-import CartContextProvider from './context/CartContext';
+import { CartProvider } from "./context/CartContext";
 
 function App() {
   return (
     <div className="App">
-      <CartContextProvider>
+      <CartProvider>
         <Header />
-        <Shop />
+        <AddUser />
         <Map />
-      </CartContextProvider>
+      </CartProvider>
     </div>
   );
 }
 
-export default App;
+export default App; 

@@ -2,17 +2,16 @@
 
 ## Overview
 
-Component hierarchy. Component Product updates Header and popup inside Map using context.
+Component hierarchy. Component AddUser updates Header and popup inside Map using context.
 
 ```text
 App
     - Header
-    - Shop
-        - Product
+    - AddUser
     - Map
         - MapContainer
             - Marker
-                  - Popup
+                - Popup
 ```
 
 ## Install and Start App
@@ -25,11 +24,3 @@ npm start
 ```
 
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-## Unit Tests
-
-Execute tests in App.test.js. Simulates click event and counting items using getByTestId.
-
-```sh
-npm test
-```
