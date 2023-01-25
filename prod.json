@@ -1,0 +1,4 @@
+[
+  {"name":"Fresh Milk 1L", "barCode": "123456789", "expX": 3, "expY": 1},
+  {"name":"Orange Juice 1L", "barCode": "45678789", "expX": 7, "expY": 3}
+]
