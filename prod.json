@@ -1,7 +1,0 @@
-[
-  {"name":"Fresh Milk 1L", "barCode": "123456789", "expX": 5, "expY": 2},
-  {"name":"Orange Juice 1L", "barCode": "45678789", "expX": 35, "expY": 15},
-  {"name":"Ice cream", "barCode": "567887788", "expX": 2, "expY": 1},
-  {"name":"Steak", "barCode": "6787878", "expX": null, "expY": 3},
-  {"name":"Donut", "barCode": "89887765", "expX": null, "expY": 1}
-]
