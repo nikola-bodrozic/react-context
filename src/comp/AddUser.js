@@ -4,14 +4,17 @@ import { CartContext } from "../context/CartContext";
 const AddUser = () => {
   const [name, setName] = useState("");
   const [data, setData] = useContext(CartContext);
+
   const handleChange = (event) => {
+    console.log(event.target.name , " has value ", event.target.value);
     if (event.target.name === "username") setName(event.target.value);
   };
 
-  let id = Math.floor(Math.random() * 1000);
   const handleSubmit = (event) => {
     event.preventDefault();
-    setData((prevData) => [...data, { id: id, name: name }]);
+    const id = Math.floor(Math.random() * 1000);
+    console.log("name ", name)
+    setData((prevData) => [...prevData, { id: id, name: name }]);
   };
 
   return (
@@ -24,10 +27,11 @@ const AddUser = () => {
             type="text"
             name="username"
             value={name}
-            onChange={handleChange}
+            onChange={(e)=>handleChange(e)}
           />
         </label>
         <br />
+        <pre>{JSON.stringify(data)}</pre>
         <br />
         <input type="submit" value="Submit" />
       </form>
