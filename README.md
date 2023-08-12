@@ -2,17 +2,17 @@
 
 ## Overview
 
-Component hierarchy. Component AddUser updates Header and popup inside Map using context.
+### Context
+
+Component hierarchy. 
 
 ```text
 App
     - Header
     - AddUser
-    - Map
-        - MapContainer
-            - Marker
-                - Popup
 ```
+
+Component AddUser updates Header using context.
 
 ## Install and Start App
 
@@ -20,7 +20,6 @@ Run:
 
 ```sh
 npm install
-npm run server
 npm start
 ```
 

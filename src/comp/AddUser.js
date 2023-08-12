@@ -1,9 +1,9 @@
 import React, { useState, useContext } from "react";
-import { CartContext } from "../context/CartContext";
+import { UserContext } from "../context/UsersContext";
 
 const AddUser = () => {
   const [name, setName] = useState("");
-  const [data, setData] = useContext(CartContext);
+  const [data, setData] = useContext(UserContext);
 
   const handleChange = (event) => {
     console.log(event.target.name , " has value ", event.target.value);

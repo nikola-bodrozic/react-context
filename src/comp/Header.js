@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
-import { CartContext } from "../context/CartContext";
+import { UserContext } from "../context/UsersContext";
 
 const Navbar = () => {
-  const [data] = useContext(CartContext);
+  const [data] = useContext(UserContext);
 
   return (
     <>
