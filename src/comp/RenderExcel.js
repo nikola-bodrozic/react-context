@@ -1,9 +1,10 @@
 import React from "react";
 import Excel from 'exceljs';
 import { saveAs } from 'file-saver';
-export const workSheetName = 'Worksheet-1';
-export const workBookName = 'MyWorkBook';
-export const myInputId = 'myInput';
+
+const workSheetName = 'Worksheet-1';
+const workBookName = 'MyWorkBook';
+const myInputId = 'myInput';
 
 export const columns = [
   { header: 'ID', key: 'id' },

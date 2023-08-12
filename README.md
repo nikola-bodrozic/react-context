@@ -2,17 +2,22 @@
 
 ## Overview
 
-### Context
-
 Component hierarchy. 
 
 ```text
 App
-    - Header
-    - AddUser
+    - NotesList
+    - UserContext
+        - Header
+        - AddUser
+    - RenderExcel
 ```
 
+NotesList shows how to mock back end
+
 Component AddUser updates Header using context.
+
+RenderExcel downloads Excel file, data is in the table.
 
 ## Install and Start App
 
