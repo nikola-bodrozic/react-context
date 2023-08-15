@@ -7,10 +7,10 @@ import Form from './comp/Form';
 import "./App.css";
 import AddUser from "./comp/AddUser";
 import Header from "./comp/Header";
-
 import { UserProvider } from "./context/UsersContext";
 import RenderExcel from './comp/RenderExcel';
 import { notesMockCRUD } from './notesMockCRUD';
+import MockingAxios from './comp/MockingAxios';
 
 function App() {
   const [notes, setNotes] = useState([]);
@@ -61,10 +61,9 @@ function App() {
         <AddUser />
       </UserProvider>
       <RenderExcel />
+      <MockingAxios />
     </div>
   );
 }
 
 export default App;
-
-
