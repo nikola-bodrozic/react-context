@@ -14,7 +14,7 @@ App
     - MockingAxios
 ```
 
-NotesList shows how to mock back end
+NotesList shows how to mock back end using MirageJS
 
 Component AddUser updates Header using context.
 
