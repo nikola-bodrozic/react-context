@@ -1,6 +1,7 @@
 import React from "react";
 import Excel from 'exceljs';
 import { saveAs } from 'file-saver';
+import { data } from "./data";
 
 const workSheetName = 'Worksheet-1';
 const workBookName = 'MyWorkBook';
@@ -10,19 +11,6 @@ export const columns = [
   { header: 'ID', key: 'id' },
   { header: 'First Name', key: 'firstName' },
   { header: 'Last Name', key: 'lastName' },
-];
-
-export const data = [
-  {
-    id: 1,
-    firstName: 'Kylie',
-    lastName: 'James',
-  },
-  {
-    id:2,
-    firstName: 'Harry',
-    lastName: 'Peake',
-  }
 ];
 
 const generateExcel = (workbook) => {
