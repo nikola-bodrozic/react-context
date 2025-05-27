@@ -31,4 +31,7 @@ npm install
 npm start
 ```
 
+run `server.js` in different folder outside project folder.
+
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+

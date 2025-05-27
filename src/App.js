@@ -10,6 +10,7 @@ import Header from "./comp/Header";
 import { UserProvider } from "./context/UsersContext";
 import RenderExcel from './comp/RenderExcel';
 import { notesMockCRUD } from './notesMockCRUD';
+import Map from   './comp/Map';
 import MockingAxios from './comp/MockingAxios';
 
 function App() {
@@ -59,6 +60,7 @@ function App() {
       <UserProvider>
         <Header />
         <AddUser />
+        <Map />
       </UserProvider>
       <RenderExcel />
       <MockingAxios />
