@@ -3,6 +3,9 @@ import styles from './FormValidator.module.css';
 import axios from 'axios'; // Import axios
 import ReCAPTCHA from 'react-google-recaptcha'; // Import ReCAPTCHA
 
+const minUser  = 5;
+const minPass = 8;
+
 const FormValidator = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -43,14 +46,14 @@ const FormValidator = () => {
     const newValidState = {};
     let allFieldsAreValid = true;
 
-    if (formData.name.length < 2) {
+    if (formData.name.length < minUser) {
         newValidState.name = true;
         allFieldsAreValid = false;
     } else {
         newValidState.name = false;
     }
 
-    if (formData.password.length < 2) {
+    if (formData.password.length < minPass) {
         newValidState.password = true;
         allFieldsAreValid = false;
     } else {
@@ -61,7 +64,6 @@ const FormValidator = () => {
 
     return allFieldsAreValid;
   };
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -166,7 +168,7 @@ const FormValidator = () => {
           onBlur={handleBlur}
           required // HTML5 validation
         />
-        <span className={valid.name ? styles.errorLabel : ''}>{valid.name && " min. 2 chars"}</span>
+        <span className={valid.name ? styles.errorLabel : ''}>{valid.name && " min. 5 chars"}</span>
       </div>
       <div className={styles.inputGroup}>
         <label className={valid.password ? styles.errorLabel : ''} htmlFor="password">Password:</label>
@@ -180,7 +182,7 @@ const FormValidator = () => {
           onBlur={handleBlur}
           required // HTML5 validation
         />
-        <span className={valid.password ? styles.errorLabel : ''}>{valid.password && " min. 2 chars"}</span>
+        <span className={valid.password ? styles.errorLabel : ''}>{valid.password && " min. 8 chars"}</span>
       </div>
 
       {/* Invisible reCAPTCHA component */}
@@ -192,15 +194,16 @@ const FormValidator = () => {
         onErrored={handleScriptError}
       />
 
-      <button type="submit" disabled={isSubmitDisabled} className={styles.submitButton}>
-        <span>{isLoading ? 'Submitting...' : 'Submit Form'}</span>
-      </button>
-
       {formStatus && (
         <p className={formStatus.startsWith('Error') ? styles.errorMessage : styles.successMessage}>
           {formStatus}
         </p>
       )}
+
+      <button type="submit" disabled={isSubmitDisabled} className={styles.submitButton}>
+        <span>{isLoading ? 'Submitting...' : 'Submit Form'}</span>
+      </button>
+
 
       {/* reCAPTCHA privacy text */}
       <p style={{ fontSize: '0.75em', marginTop: '10px', color: '#666', textAlign: 'center' }}>

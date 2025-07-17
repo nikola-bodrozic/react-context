@@ -7,6 +7,9 @@ const axios = require('axios');
 const app = express();
 const PORT = process.env.PORT || 8000;
 
+const minUser  = 5;
+const minPass = 8;
+
 const RECAPTCHA_SECRET_KEY = process.env.CAP_SECRET_KEY;
 if (!RECAPTCHA_SECRET_KEY) {
     console.error('ERROR: CAP_SECRET_KEY is not defined in .env');
@@ -19,6 +22,24 @@ app.use(cors({
     allowedHeaders: ['Content-Type'],
 }));
 app.use(express.json()); // Body parser for JSON requests
+
+const getClientIp = (req) => {
+  // 1. Check for 'x-forwarded-for' header (common with proxies like Nginx)
+  const forwardedFor = req.headers['x-forwarded-for'];
+  
+  // 2. If header exists, take the first IP (comma-separated list)
+  if (forwardedFor) {
+    return typeof forwardedFor === 'string' 
+      ? forwardedFor.split(',')[0].trim() 
+      : forwardedFor[0].trim();
+  }
+  
+  // 3. Fallback to Express's req.ip
+  if (req.ip) return req.ip;
+  
+  // 4. Final fallback to legacy connection remoteAddress
+  return req.connection?.remoteAddress || 'unknown';
+};
 
 // --- Routes ---
 
@@ -34,16 +55,15 @@ app.post('/cap', async (req, res) => {
 
     console.log('Received form submission:');
     console.log('Name:', name);
-    // console.log('Password:', password); // Avoid logging passwords in production
     console.log('reCAPTCHA Token:', recaptchaToken ? 'Received' : 'Missing');
     console.log('User IP:', userIp);
 
     // 1. Server-side data validation
-    if (!name || name.length < 2) {
-        return res.status(400).json({ success: false, error: 'Name must be at least 2 characters.' });
+    if (!name || name.length < minUser) {  
+        return res.status(400).json({ success: false, error: `Name must be at least ${minUser} characters.` });
     }
-    if (!password || password.length < 2) {
-        return res.status(400).json({ success: false, error: 'Password must be at least 2 characters.' });
+    if (!password || password.length < minPass) {
+        return res.status(400).json({ success: false, error: `Password must be at least ${minPass} characters.` });
     }
     if (!recaptchaToken) {
         return res.status(400).json({ success: false, error: 'reCAPTCHA token is missing.' });
@@ -51,6 +71,7 @@ app.post('/cap', async (req, res) => {
 
     // 2. Verify reCAPTCHA token with Google
     try {
+        const userIp = getClientIp(req);
         const googleResponse = await axios.post(
             `https://www.google.com/recaptcha/api/siteverify`,
             null, // No data in the request body, send as URL parameters
@@ -63,11 +84,10 @@ app.post('/cap', async (req, res) => {
             }
         );
 
-        const { success, score, 'error-codes': errorCodes } = googleResponse.data;
+        const { success, 'error-codes': errorCodes } = googleResponse.data;
 
         if (success) {
-            console.log('reCAPTCHA Verification Success. Score:', score);
-            console.log(`Successfully validated and received: Name=${name}, Password=${password}`);
+            console.log(`Successfully validated and received: Name=${name}`);
             return res.status(200).json({ success: true, message: 'Form submitted and reCAPTCHA verified!' });
         } else {
             console.error('reCAPTCHA Verification Failed. Error codes:', errorCodes);
